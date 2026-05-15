@@ -106,11 +106,11 @@ const ASMAUL_HUSNA = [
   { id: 99, arab: 'الصَّبُورُ', latin: 'Ash-Shabur', arti: 'Yang Maha Sabar' }
 ];
 
-const ITEMS_PER_PAGE = 20;
+// const ITEMS_PER_PAGE = 20;
 
 export default function AsmaulHusnaPage() {
   const [search, setSearch] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(1);
 
   const filteredData = useMemo(() => {
     return ASMAUL_HUSNA.filter(item => 
@@ -119,16 +119,16 @@ export default function AsmaulHusnaPage() {
     );
   }, [search]);
 
-  const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
+  // const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
   const currentData = useMemo(() => {
-    const start = (currentPage - 1) * ITEMS_PER_PAGE;
-    return filteredData.slice(start, start + ITEMS_PER_PAGE);
-  }, [filteredData, currentPage]);
+    // const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filteredData;
+  }, [filteredData]);
 
-  const goToPage = (page: number) => {
-    setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  // const goToPage = (page: number) => {
+  //   setCurrentPage(page);
+  //   window.scrollTo({ top: 0, behavior: 'smooth' });
+  // };
 
   return (
     <AppLayout>
@@ -181,47 +181,8 @@ export default function AsmaulHusnaPage() {
           </div>
         )}
 
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-border">
-            <p className="text-xs text-muted-foreground">
-              Menampilkan {Math.min(filteredData.length, (currentPage - 1) * ITEMS_PER_PAGE + 1)}-{Math.min(filteredData.length, currentPage * ITEMS_PER_PAGE)} dari {filteredData.length} nama
-            </p>
-            <div className="flex items-center gap-1">
-              <button
-                onClick={() => goToPage(currentPage - 1)}
-                disabled={currentPage === 1}
-                className="p-2 rounded-lg border border-border hover:bg-muted disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-              >
-                <ChevronLeft size={18} />
-              </button>
-              
-              <div className="flex items-center gap-1 px-2">
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-                  <button
-                    key={page}
-                    onClick={() => goToPage(page)}
-                    className={`w-8 h-8 rounded-lg text-xs font-bold transition-all ${
-                      currentPage === page 
-                      ? 'bg-primary text-white shadow-sm' 
-                      : 'hover:bg-muted text-muted-foreground'
-                    }`}
-                  >
-                    {page}
-                  </button>
-                ))}
-              </div>
-
-              <button
-                onClick={() => goToPage(currentPage + 1)}
-                disabled={currentPage === totalPages}
-                className="p-2 rounded-lg border border-border hover:bg-muted disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-              >
-                <ChevronRight size={18} />
-              </button>
-            </div>
-          </div>
-        )}
+        {/* Pagination removed for single page scroll */}
+        {/* {totalPages > 1 && ( ... )} */}
 
         {/* Info Card */}
         <div className="bg-primary/5 p-4 rounded-2xl flex items-center gap-4 border border-primary/10">
