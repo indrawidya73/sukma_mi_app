@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
 import AppImage from '@/components/ui/AppImage';
-import { LayoutDashboard, Users, GraduationCap, School, Star, BookOpen, CalendarDays, ClipboardList, BarChart3, ChevronLeft, ChevronRight, LogOut, ShieldCheck, Clock, BookOpenCheck, } from 'lucide-react';
+import { LayoutDashboard, Users, GraduationCap, School, Star, BookOpen, CalendarDays, ClipboardList, BarChart3, ChevronLeft, ChevronRight, LogOut, ShieldCheck, Clock, BookOpenCheck, Stars, Library, Wind, Waves, } from 'lucide-react';
 import { useAuth } from '@/app/AuthContext';
 import { toast } from 'sonner';
 
@@ -27,8 +27,17 @@ const navSections: NavSection[] = [
     section: 'Utama',
     items: [
       { href: '/', label: 'Dashboard', icon: <LayoutDashboard size={18} />, roles: ['admin', 'guru', 'murid'] },
+    ],
+  },
+  {
+    section: 'Ibadah',
+    items: [
       { href: '/jadwal-sholat', label: 'Jadwal Sholat', icon: <Clock size={18} />, roles: ['admin', 'guru', 'murid'] },
       { href: '/doa-harian', label: 'Doa Harian', icon: <BookOpenCheck size={18} />, roles: ['admin', 'guru', 'murid'] },
+      { href: '/asmaul-husna', label: 'Asmaul Husna', icon: <Stars size={18} />, roles: ['admin', 'guru', 'murid'] },
+      { href: '/aqidatul-awam', label: 'Aqidatul Awam', icon: <Library size={18} />, roles: ['admin', 'guru', 'murid'] },
+      { href: '/tahlil', label: 'Tahlil', icon: <Wind size={18} />, roles: ['admin', 'guru', 'murid'] },
+      { href: '/istighotsah', label: 'Istighotsah', icon: <Waves size={18} />, roles: ['admin', 'guru', 'murid'] },
     ],
   },
   {
