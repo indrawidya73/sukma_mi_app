@@ -82,7 +82,7 @@ export default function LoginPageWrapper() {
         </div>
 
         {/* Login Card */}
-        <div className="bg-white/95 backdrop-blur-md rounded-2xl p-8 shadow-2xl">
+        <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-8 shadow-2xl border border-white/20">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Error Message */}
             {error && (
