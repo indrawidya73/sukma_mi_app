@@ -67,22 +67,22 @@ export default function LoginPageWrapper() {
   return (
     <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-cover bg-center" 
          style={{ backgroundImage: 'linear-gradient(to bottom, rgba(22, 163, 74, 0.4), rgba(0, 0, 0, 0.7)), url("/assets/images/login-bg.jpg")' }}>
-      <div className="w-full max-w-md relative z-10">
+      <div className="w-full max-w-sm relative z-10">
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="mb-4 flex justify-center">
-            <img src="/assets/images/Logo_SUKMA_1_-1778584431642.png" alt="SUKMA Logo" className="h-20 drop-shadow-lg" />
+        <div className="text-center mb-6">
+          <div className="mb-3 flex justify-center">
+            <img src="/assets/images/Logo_SUKMA_1_-1778584431642.png" alt="SUKMA Logo" className="h-16 drop-shadow-lg" />
           </div>
-          <h1 className="text-4xl font-black text-white drop-shadow-md">
+          <h1 className="text-3xl font-black text-white drop-shadow-md">
             SUKMA
           </h1>
-          <p className="text-base mt-2 font-medium text-white/90 drop-shadow-sm">
+          <p className="text-sm mt-1 font-medium text-white/90 drop-shadow-sm">
             Sistem Manajemen Sekolah MI Islamiyah Malang
           </p>
         </div>
 
         {/* Login Card */}
-        <div className="bg-white/40 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-white/30">
+        <div className="bg-white/40 backdrop-blur-xl rounded-2xl p-6 shadow-2xl border border-white/30">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Error Message */}
             {error && (
