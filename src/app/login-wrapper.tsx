@@ -77,10 +77,10 @@ export default function LoginPageWrapper() {
           <div className="mb-2 sm:mb-3 flex justify-center">
             <img src="/assets/images/Logo_SUKMA_1_-1778584431642.png" alt="SUKMA Logo" className="h-12 sm:h-16 drop-shadow-lg" />
           </div>
-          <h1 className="text-xl sm:text-3xl font-black text-white drop-shadow-md uppercase tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-black text-white drop-shadow-lg uppercase tracking-tight text-center leading-tight">
             LEARNING MANAGEMENT SYSTEM
           </h1>
-          <p className="text-[10px] sm:text-sm mt-1 font-medium text-white/90 drop-shadow-sm">
+          <p className="text-sm sm:text-base mt-2 font-bold text-white drop-shadow-md text-center">
             MI ISLAMIYAH - Malang
           </p>
         </div>
