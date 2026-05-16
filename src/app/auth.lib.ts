@@ -7,28 +7,47 @@ export async function authenticate(
   username: string,
   password: string
 ): Promise<User> {
-  // Query Supabase profiles table
-  const { data, error } = await supabase
-    .from('profiles')
-    .select('*')
-    .eq('username', username.toLowerCase())
-    .single();
+  // --- MOCK AUTHENTICATION (Temporary Rollback) ---
+  const mockUsers = [
+    { id: '1', username: 'admin', password: 'admin123', role: 'admin' as UserRole, name: 'Administrator Utama' },
+    { id: '2', username: 'guru', password: 'guru123', role: 'guru' as UserRole, name: 'Guru Pengajar' },
+    { id: '3', username: 'murid', password: 'murid123', role: 'murid' as UserRole, name: 'Siswa MI' },
+  ];
 
-  if (error || !data) {
-    throw new Error('Username tidak ditemukan');
-  }
+  const foundUser = mockUsers.find(
+    (u) => u.username === username.toLowerCase() && u.password === password
+  );
 
-  // In production, password should be hashed. For now, we compare direct (as per mock logic)
-  if (data.password !== password) {
-    throw new Error('Password salah');
+  if (!foundUser) {
+    // Fallback search in Supabase for convenience (optional)
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('username', username.toLowerCase())
+        .single();
+
+      if (!error && data && data.password === password) {
+        return {
+          id: data.id,
+          username: data.username,
+          role: data.role as UserRole,
+          name: data.nama_lengkap || data.name,
+          email: data.email,
+        };
+      }
+    } catch (e) {
+      console.warn('Supabase auth fallback failed');
+    }
+    
+    throw new Error('Username atau Password salah');
   }
 
   return {
-    id: data.id,
-    username: data.username,
-    role: data.role as UserRole,
-    name: data.name,
-    email: data.email,
+    id: foundUser.id,
+    username: foundUser.username,
+    role: foundUser.role,
+    name: foundUser.name,
   };
 }
 
