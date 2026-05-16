@@ -1,38 +1,5 @@
 import { User, UserRole } from './auth.types';
-
-// Mock users database (production-ready bisa gunakan actual database)
-const MOCK_USERS: Record<string, { password: string; user: User }> = {
-  admin: {
-    password: 'admin123',
-    user: {
-      id: '1',
-      username: 'admin',
-      role: 'admin',
-      name: 'Administrator',
-      email: 'admin@miislamiyah.sch.id',
-    },
-  },
-  guru: {
-    password: 'guru123',
-    user: {
-      id: '2',
-      username: 'guru',
-      role: 'guru',
-      name: 'Guru Kelas',
-      email: 'guru@miislamiyah.sch.id',
-    },
-  },
-  murid: {
-    password: 'murid123',
-    user: {
-      id: '3',
-      username: 'murid',
-      role: 'murid',
-      name: 'Siswa',
-      email: 'murid@miislamiyah.sch.id',
-    },
-  },
-};
+import { supabase } from '@/utils/supabase';
 
 const AUTH_STORAGE_KEY = 'sukma_auth_user';
 
@@ -40,16 +7,29 @@ export async function authenticate(
   username: string,
   password: string
 ): Promise<User> {
-  // Simulate async call
-  await new Promise((resolve) => setTimeout(resolve, 300));
+  // Query Supabase profiles table
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('username', username.toLowerCase())
+    .single();
 
-  const userRecord = MOCK_USERS[username.toLowerCase()];
-
-  if (!userRecord || userRecord.password !== password) {
-    throw new Error('Username atau password salah');
+  if (error || !data) {
+    throw new Error('Username tidak ditemukan');
   }
 
-  return userRecord.user;
+  // In production, password should be hashed. For now, we compare direct (as per mock logic)
+  if (data.password !== password) {
+    throw new Error('Password salah');
+  }
+
+  return {
+    id: data.id,
+    username: data.username,
+    role: data.role as UserRole,
+    name: data.name,
+    email: data.email,
+  };
 }
 
 export function saveUserToStorage(user: User): void {
